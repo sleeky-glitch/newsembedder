@@ -30,26 +30,6 @@ pc = pinecone.Pinecone(api_key=PINECONE_API_KEY)
 index_name = "vectornews"
 dimension = 1536
 
-@st.cache_resource
-def init_pinecone():
-    existing_indexes = [index.name for index in pc.list_indexes()]
-
-    if index_name not in existing_indexes:
-        pc.create_index(
-            name=index_name,
-            dimension=dimension,
-            metric="cosine",
-            spec=ServerlessSpec
-        )
-        st.info(f"Created new Pinecone index: {index_name}")
-        # Wait for index to be ready
-        while not pc.describe_index(index_name).status['ready']:
-            time.sleep(1)
-
-    return pc.Index(index_name)
-
-index = init_pinecone()
-
 def extract_text_from_pdf(pdf_path):
     """Extract text from PDF using OCR"""
     try:
