@@ -23,7 +23,6 @@ openai.api_key = OPENAI_API_KEY
 
 # Initialize Pinecone with new method
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
-
 pc = pinecone.Pinecone(api_key=PINECONE_API_KEY)
 
 # Create or connect to an existing index
@@ -32,7 +31,7 @@ dimension = 1536
 
 @st.cache_resource
 def init_pinecone():
-existing_indexes = [index.name for index in pc.list_indexes()]
+    existing_indexes = [index.name for index in pc.list_indexes()]
 
     if index_name not in existing_indexes:
         pc.create_index(
@@ -42,7 +41,6 @@ existing_indexes = [index.name for index in pc.list_indexes()]
         )
         st.info(f"Created new Pinecone index: {index_name}")
     return pc.Index(index_name)
-
 
 index = init_pinecone()
 
