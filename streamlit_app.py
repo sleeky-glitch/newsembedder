@@ -9,6 +9,7 @@ import numpy as np
 import time
 from pathlib import Path
 import tempfile
+from pinecone import ServerlessSpec
 
 # Streamlit page config
 st.set_page_config(
@@ -37,9 +38,14 @@ def init_pinecone():
         pc.create_index(
             name=index_name,
             dimension=dimension,
-            metric="cosine"
+            metric="cosine",
+            spec=ServerlessSpec
         )
         st.info(f"Created new Pinecone index: {index_name}")
+        # Wait for index to be ready
+        while not pc.describe_index(index_name).status['ready']:
+            time.sleep(1)
+
     return pc.Index(index_name)
 
 index = init_pinecone()
