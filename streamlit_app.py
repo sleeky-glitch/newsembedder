@@ -3,7 +3,7 @@ import os
 from pdf2image import convert_from_path
 import pytesseract
 import openai
-import pinecone import pinecone
+from pinecone import pinecone
 from tqdm import tqdm
 import numpy as np
 import time
