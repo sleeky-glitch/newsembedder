@@ -21,9 +21,10 @@ st.set_page_config(
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 openai.api_key = OPENAI_API_KEY
 
-# Initialize Pinecone
+# Initialize Pinecone with new method
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
-pinecone.init(api_key=PINECONE_API_KEY)
+
+pc = pinecone.Pinecone(api_key=PINECONE_API_KEY)
 
 # Create or connect to an existing index
 index_name = "vectornews"
@@ -31,7 +32,7 @@ dimension = 1536
 
 @st.cache_resource
 def init_pinecone():
-    return pinecone.Index(index_name)
+    return pc.Index(index_name)
 
 index = init_pinecone()
 
@@ -183,7 +184,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Created/Modified files during execution:
-# Temporary PDF files are created and deleted during processing
-# Data is stored in Pinecone database
