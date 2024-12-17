@@ -35,7 +35,7 @@ def init_pinecone():
 existing_indexes = [index.name for index in pc.list_indexes()]
 
     if index_name not in existing_indexes:
-pc.create_index(
+        pc.create_index(
             name=index_name,
             dimension=dimension,
             metric="cosine"
