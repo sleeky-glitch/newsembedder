@@ -32,7 +32,17 @@ dimension = 1536
 
 @st.cache_resource
 def init_pinecone():
+existing_indexes = [index.name for index in pc.list_indexes()]
+
+    if index_name not in existing_indexes:
+pc.create_index(
+            name=index_name,
+            dimension=dimension,
+            metric="cosine"
+        )
+        st.info(f"Created new Pinecone index: {index_name}")
     return pc.Index(index_name)
+
 
 index = init_pinecone()
 
