@@ -1,0 +1,7 @@
+streamlit
+pdf2image
+pytesseract
+openai
+pinecone-client
+tqdm
+numpy
