@@ -24,7 +24,7 @@ openai.api_key = OPENAI_API_KEY
 
 # Initialize Pinecone with new method
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
-pc = Pinecone(api_key=PINECONE_API_KEY)
+pc = pinecone(api_key=PINECONE_API_KEY)
 
 # Create or connect to an existing index
 index_name = "vectornews"
