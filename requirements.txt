@@ -3,5 +3,6 @@ pdf2image
 pytesseract
 openai
 pinecone-client
+pinecone
 tqdm
 numpy
