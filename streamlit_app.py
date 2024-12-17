@@ -29,7 +29,7 @@ pinecone.api_key=PINECONE_API_KEY
 # Create or connect to an existing index
 index_name = "vectornews"
 dimension = 1536
-index = pinecone.index(index_name)
+index = index(index_name)
 
 def extract_text_from_pdf(pdf_path):
     """Extract text from PDF using OCR"""
